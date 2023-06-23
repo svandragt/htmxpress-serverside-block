@@ -35,3 +35,7 @@ The templates/random_posts.php template contains a WP_Query to load 3 random pos
 ```php
     echo '<button hx-post="/htmx/random_posts" hx-target="#random-posts"> More </button>';
 ```
+## Demo:
+
+https://github.com/svandragt/htmxpress-serverside-block/assets/594871/99bdb328-2102-469c-944f-d53baff46594
+
