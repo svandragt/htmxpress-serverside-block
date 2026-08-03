@@ -2,7 +2,7 @@
     "name": "svandragt/htmxpress-serverside-block",
     "license": "GPL-2.0-or-later",
     "require-dev": {
-        "phpunit/phpunit": "^10",
+        "phpunit/phpunit": "^13",
         "brain/monkey": "^2"
     },
     "autoload-dev": {
