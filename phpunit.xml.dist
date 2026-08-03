@@ -8,4 +8,11 @@
             <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>includes</directory>
+            <file>htmx-server-block.php</file>
+            <directory>templates</directory>
+        </include>
+    </source>
 </phpunit>

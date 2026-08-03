@@ -1,9 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.5/.schema/devbox.schema.json",
   "packages": [
-    "php@8.2",
-    "php82Packages.composer@latest",
-    "nodejs@22"
+    "nodejs@22",
+    "php@8.4",
+    "php84Packages.composer@latest",
+    "php84Extensions.pcov@latest"
   ],
   "shell": {
     "init_hook": [
