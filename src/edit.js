@@ -27,7 +27,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @return {WPElement} Element to render.
+ * @return {Element} Element to render.
  */
 export default function Edit() {
 	return (
