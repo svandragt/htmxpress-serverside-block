@@ -13,6 +13,8 @@
  * @package           create-block
  */
 
+require_once __DIR__ . '/includes/render.php';
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -22,20 +24,11 @@
  */
 function create_block_htmx_server_block_block_init() {
 	$block_args = [
-		'render_callback' => function () {
-			ob_start();
-			load_template( __DIR__ . '/templates/random_posts.php' );
-
-			return ob_get_clean();
-		},
+		'render_callback' => 'htmx_server_block_render_callback',
 	];
 	register_block_type( __DIR__ . '/build', $block_args );
 }
 
 add_action( 'init', 'create_block_htmx_server_block_block_init' );
 
-add_filter( 'htmx.template_paths', static function ( $paths ) {
-	$paths[] = __DIR__ . '/templates';
-
-	return $paths;
-} );
+add_filter( 'htmx.template_paths', 'htmx_server_block_register_template_paths' );

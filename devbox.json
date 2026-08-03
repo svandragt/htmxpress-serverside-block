@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.5/.schema/devbox.schema.json",
+  "packages": [
+    "nodejs@22",
+    "php@8.4",
+    "php84Packages.composer@latest",
+    "php84Extensions.pcov@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "composer install",
+        "composer test",
+        "npm ci",
+        "npm run lint:js",
+        "npm run lint:css",
+        "npm run build"
+      ]
+    }
+  }
+}
