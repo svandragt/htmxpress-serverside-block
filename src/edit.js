@@ -9,7 +9,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import {useBlockProps} from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -31,7 +31,7 @@ import ServerSideRender from '@wordpress/server-side-render';
  */
 export default function Edit() {
 	return (
-		<div {...useBlockProps()} data-test="test">
+		<div { ...useBlockProps() } data-test="test">
 			<ServerSideRender
 				block="create-block/htmx-server-block"
 				EmptyResponsePlaceholder={ 'nothing' }
