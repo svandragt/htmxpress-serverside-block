@@ -16,7 +16,7 @@
 	},
 	"devDependencies": {
 		"@wordpress/block-editor": "^16.2.0",
-		"@wordpress/blocks": "^15.25.0",
+		"@wordpress/blocks": "^15.27.0",
 		"@wordpress/scripts": "^34.1.0",
 		"@wordpress/server-side-render": "^6.29.0"
 	}
