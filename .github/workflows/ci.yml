@@ -6,6 +6,8 @@ on:
   pull_request:
 
 jobs:
+  # Branch protection on main requires this job name. Renaming it silently
+  # removes the required check rather than failing it.
   test:
     runs-on: ubuntu-latest
     steps:
@@ -15,12 +17,19 @@ jobs:
         with:
           php-version: '8.4'
           tools: composer
+          coverage: pcov
 
       - name: Install PHP dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run PHP tests
-        run: composer test
+      # Invoked directly rather than through `composer test:coverage`: Composer's
+      # script runner can resolve a different php than the one carrying pcov,
+      # which surfaces as "No code coverage driver available".
+      - name: Run PHP tests with coverage
+        run: php -d pcov.directory=. vendor/bin/phpunit --coverage-clover coverage/clover.xml
+
+      - name: Enforce coverage threshold
+        run: php bin/coverage-check.php 50
 
       - uses: actions/setup-node@v7
         with:
@@ -35,6 +44,9 @@ jobs:
 
       - name: Lint CSS
         run: npm run lint:css
+
+      - name: Run JS tests
+        run: npm run test:unit
 
       - name: Build
         run: npm run build
