@@ -12,11 +12,13 @@
     ],
     "scripts": {
       "test": [
-        "composer install",
-        "composer test",
+        "viv install",
+        "php -d pcov.directory=. vendor/bin/phpunit --coverage-clover coverage/clover.xml",
+        "php bin/coverage-check.php 50",
         "npm ci",
         "npm run lint:js",
         "npm run lint:css",
+        "npm run test:unit",
         "npm run build"
       ]
     }
