@@ -11,7 +11,11 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "php -d pcov.directory=. vendor/bin/phpunit",
+        "test:coverage": [
+            "php -d pcov.directory=. vendor/bin/phpunit --coverage-clover coverage/clover.xml",
+            "php bin/coverage-check.php 50"
+        ]
     },
     "config": {
         "sort-packages": true
