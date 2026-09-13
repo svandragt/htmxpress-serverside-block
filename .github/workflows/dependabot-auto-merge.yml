@@ -20,3 +20,17 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Dependabot can rebase a PR onto a newer release, turning a minor update
+      # into a major one. Auto-merge enabled on the earlier revision survives
+      # that, so the step above is not enough on its own: withdraw it whenever
+      # the current head is a major. @wordpress/scripts 34.1.0 -> 35.0.0 reached
+      # main this way.
+      - name: Withdraw auto-merge from majors
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        # Exits non-zero when auto-merge was never enabled, which is the common
+        # case for a PR that opened as a major. Nothing to undo, so don't fail.
+        run: gh pr merge --disable-auto "$PR_URL" || true
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
