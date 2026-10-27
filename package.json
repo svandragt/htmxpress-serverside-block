@@ -29,6 +29,8 @@
 		"js-yaml@^4.0.0": "^4.3.2",
 		"svgo": "^3.3.5",
 		"adm-zip": "^0.6.1",
-		"markdown-it": "^14.3.3"
+		"markdown-it": "^14.3.3",
+		"qs": "^6.16.1",
+		"serialize-javascript": "^7.1.3"
 	}
 }
