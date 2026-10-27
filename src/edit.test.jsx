@@ -27,7 +27,7 @@ describe( 'Edit', () => {
 	let container;
 
 	beforeAll( () => {
-		// React 18's act() checks this flag and nothing sets it in Vitest.
+		// React's act() checks this flag and nothing sets it in Vitest.
 		globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 	} );
 

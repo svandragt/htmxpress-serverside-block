@@ -60,7 +60,7 @@ devbox run -- npm run test:unit -- -t 'renders'
 mirrors `.github/workflows/ci.yml` step for step, so a green run there is a good predictor of CI.
 
 There is no `@testing-library/react` in this project and adding it isn't necessary — the JS tests
-render with React 18's own `createRoot` and `act`. Three non-obvious requirements:
+render with React's own `createRoot` and `act`. Three non-obvious requirements:
 
 - Set `globalThis.IS_REACT_ACT_ENVIRONMENT = true` before rendering. Nothing in the Vitest setup
   sets it.
