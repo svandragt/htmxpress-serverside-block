@@ -28,7 +28,7 @@ devbox run -- npm run start        # watch-mode build (wp-scripts start)
 devbox run -- npm run build        # production build to build/
 devbox run -- npm run lint:js      # lint JS
 devbox run -- npm run lint:css     # lint SCSS
-devbox run -- npm run test:unit    # run the JS tests (Jest, via wp-scripts)
+devbox run -- npm run test:unit    # run the JS tests (Vitest, via wp-scripts)
 devbox run -- npm run plugin-zip   # package the plugin as a zip
 
 devbox run -- viv install          # install PHP deps
@@ -49,7 +49,7 @@ devbox run -- viv exec phpunit --filter testRenderCallbackReturnsTemplateOutput
 devbox run -- viv exec phpunit tests/Unit/RenderTest.php
 ```
 
-Run a single JS test by file or name, passing Jest's own flags through:
+Run a single JS test by file or name, passing Vitest's own flags through:
 
 ```
 devbox run -- npm run test:unit -- src/edit.test.js
@@ -60,10 +60,18 @@ devbox run -- npm run test:unit -- -t 'renders'
 mirrors `.github/workflows/ci.yml` step for step, so a green run there is a good predictor of CI.
 
 There is no `@testing-library/react` in this project and adding it isn't necessary — the JS tests
-render with React 18's own `createRoot` and `act`. Two non-obvious requirements: set
-`globalThis.IS_REACT_ACT_ENVIRONMENT = true` before rendering (the wp-scripts jsdom preset predates
-React 18 and doesn't set it), and import `act` from `react`, not `react-dom/test-utils` — the
-deprecated one emits a warning that `@wordpress/jest-console` escalates into a test failure.
+render with React 18's own `createRoot` and `act`. Three non-obvious requirements:
+
+- Set `globalThis.IS_REACT_ACT_ENVIRONMENT = true` before rendering. Nothing in the Vitest setup
+  sets it.
+- Import `act` from `react`, not `react-dom/test-utils`, which is deprecated.
+- Import `describe`, `it`, `expect` and `vi` from `vitest`. `globals` is off, and the lint config
+  flags bare globals as `no-undef`.
+
+Vitest is configured in `vitest.config.mjs` (jsdom environment). Vite does not transform JSX in
+`.js` files, so any file that contains JSX, tests included, uses the `.jsx` extension.
+`@wordpress/scripts` 37 does not bundle Vitest, Vite or jsdom, so the project lists them as
+devDependencies. `wp-scripts test-unit-js` errors without them.
 
 ## Coverage: the pcov trap
 
@@ -84,7 +92,7 @@ percentage passed as its argument.
 Two halves, connected loosely:
 
 - **Editor side** (`src/`): a normal Gutenberg block. `index.js` registers it with `save: null`;
-  `edit.js` renders it in the editor using `<ServerSideRender>`. There's no `save.js` — output is
+  `edit.jsx` renders it in the editor using `<ServerSideRender>`. There's no `save.js` — output is
   always server-rendered. `wp-scripts` builds this into `build/`, which is what
   `htmx-server-block.php` hands to `register_block_type()`.
 - **Server/frontend side**: `htmx-server-block.php` is hook registration only. The callbacks it

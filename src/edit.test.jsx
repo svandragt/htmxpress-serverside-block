@@ -1,23 +1,33 @@
 import { act } from 'react';
+import {
+	afterEach,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from 'vitest';
 import { createRoot } from 'react-dom/client';
 import Edit from './edit';
 
-jest.mock( '@wordpress/block-editor', () => ( {
-	useBlockProps: jest.fn( () => ( {
+vi.mock( '@wordpress/block-editor', () => ( {
+	useBlockProps: vi.fn( () => ( {
 		className: 'wp-block-create-block-htmx-server-block',
 	} ) ),
 } ) );
 
-jest.mock( '@wordpress/server-side-render', () => ( props ) => (
-	<div data-testid="server-side-render" data-block={ props.block } />
-) );
+vi.mock( '@wordpress/server-side-render', () => ( {
+	default: ( props ) => (
+		<div data-testid="server-side-render" data-block={ props.block } />
+	),
+} ) );
 
 describe( 'Edit', () => {
 	let container;
 
 	beforeAll( () => {
-		// React 18's act() checks this flag; the wp-scripts jsdom preset
-		// doesn't set it since it predates react-dom/client usage here.
+		// React 18's act() checks this flag and nothing sets it in Vitest.
 		globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 	} );
 
