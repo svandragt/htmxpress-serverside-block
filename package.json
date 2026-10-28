@@ -10,6 +10,7 @@
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style \"src/**/*.scss\"",
 		"lint:js": "wp-scripts lint-js src",
+		"lint:md": "wp-scripts lint-md-docs readme.md AGENTS.md",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",

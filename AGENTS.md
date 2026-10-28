@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to coding agents working with code in this repository.
 
 ## What this is
 
@@ -22,12 +22,13 @@ Two traps that cost time if you don't know them:
 
 ## Commands
 
-```
+```sh
 devbox run -- npm install          # install JS deps
 devbox run -- npm run start        # watch-mode build (wp-scripts start)
 devbox run -- npm run build        # production build to build/
 devbox run -- npm run lint:js      # lint JS
 devbox run -- npm run lint:css     # lint SCSS
+devbox run -- npm run lint:md      # lint readme.md and AGENTS.md
 devbox run -- npm run test:unit    # run the JS tests (Vitest, via wp-scripts)
 devbox run -- npm run plugin-zip   # package the plugin as a zip
 
@@ -44,15 +45,15 @@ rather than through any script runner.
 
 Run a single PHP test with PHPUnit's own filters:
 
-```
+```sh
 devbox run -- viv exec phpunit --filter testRenderCallbackReturnsTemplateOutput
 devbox run -- viv exec phpunit tests/Unit/RenderTest.php
 ```
 
 Run a single JS test by file or name, passing Vitest's own flags through:
 
-```
-devbox run -- npm run test:unit -- src/edit.test.js
+```sh
+devbox run -- npm run test:unit -- src/edit.test.jsx
 devbox run -- npm run test:unit -- -t 'renders'
 ```
 
