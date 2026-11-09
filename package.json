@@ -19,7 +19,7 @@
 	"devDependencies": {
 		"@wordpress/block-editor": "^19.0.0",
 		"@wordpress/blocks": "^17.1.0",
-		"@wordpress/scripts": "^37.0.0",
+		"@wordpress/scripts": "^37.1.0",
 		"@wordpress/server-side-render": "^6.32.0",
 		"jsdom": "^26.1.0",
 		"react": "^19.3.1",
